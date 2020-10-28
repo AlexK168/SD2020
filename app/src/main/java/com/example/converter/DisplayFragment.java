@@ -1,12 +1,17 @@
 package com.example.converter;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -14,6 +19,10 @@ import android.view.ViewGroup;
  * create an instance of this fragment.
  */
 public class DisplayFragment extends Fragment {
+
+    private TextView mInputTextView;
+    private TextView mOutputTextView;
+    private ConverterViewModel mConverterViewModel;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -43,6 +52,7 @@ public class DisplayFragment extends Fragment {
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
+
         return fragment;
     }
 
@@ -58,7 +68,31 @@ public class DisplayFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_display, container, false);
+
+        View root = inflater.inflate(R.layout.fragment_display, container, false);
+        mInputTextView = root.findViewById(R.id.textView_input);
+        mOutputTextView = root.findViewById(R.id.textView_output);
+        mConverterViewModel = new ViewModelProvider(requireActivity()).get(ConverterViewModel.class);
+        subscribe();
+
+        return root;
+    }
+
+    @SuppressLint("SetTextI18n")
+    void subscribe() {
+
+        mConverterViewModel.input.observe(
+                requireActivity(), value -> {
+                    if (value != null) {
+                        mInputTextView.setText(value.toString());
+                     }
+                });
+
+        mConverterViewModel.output.observe(
+                requireActivity(), value -> {
+                    if (value != null) {
+                        mOutputTextView.setText(value.toString());
+                    }
+                });
     }
 }
