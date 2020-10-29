@@ -15,21 +15,21 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/button_erase"
-            style="@style/Widget.AppCompat.Button.Small"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="2"
-            android:text="@string/button_erase_caption"
-            android:textSize="18sp" />
-
-        <Button
             android:id="@+id/button_clear"
             style="@style/Widget.AppCompat.Button.Small"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:text="@string/button_c_caption"
+            android:textSize="18sp" />
+
+        <Button
+            android:id="@+id/button_erase"
+            style="@style/Widget.AppCompat.Button.Small"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:text="@string/button_erase_caption"
             android:textSize="18sp" />
 
     </LinearLayout>

@@ -84,14 +84,14 @@ public class DisplayFragment extends Fragment {
         mConverterViewModel.input.observe(
                 requireActivity(), value -> {
                     if (value != null) {
-                        mInputTextView.setText(value.toString());
+                        mInputTextView.setText(value);
                      }
                 });
 
         mConverterViewModel.output.observe(
                 requireActivity(), value -> {
                     if (value != null) {
-                        mOutputTextView.setText(value.toString());
+                        mOutputTextView.setText(value);
                     }
                 });
     }

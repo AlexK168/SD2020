@@ -79,20 +79,20 @@ public class KeyboardFragment extends Fragment {
 
         View root = inflater.inflate(R.layout.fragment_keyboard, container, false);
         mConverterViewModel = new ViewModelProvider(requireActivity()).get(ConverterViewModel.class);
-        mBtn0 = (Button) root.findViewById(R.id.button_0);
-        mBtn1 = (Button) root.findViewById(R.id.button_1);
-        mBtn2 = (Button) root.findViewById(R.id.button_2);
-        mBtn3 = (Button) root.findViewById(R.id.button_3);
-        mBtn4 = (Button) root.findViewById(R.id.button_4);
-        mBtn5 = (Button) root.findViewById(R.id.button_5);
-        mBtn6 = (Button) root.findViewById(R.id.button_6);
-        mBtn7 = (Button) root.findViewById(R.id.button_7);
-        mBtn8 = (Button) root.findViewById(R.id.button_8);
-        mBtn9 = (Button) root.findViewById(R.id.button_9);
-        mBtn00 = (Button) root.findViewById(R.id.button_double_zero);
-        mBtnC = (Button) root.findViewById(R.id.button_clear);
-        mBtnE = (Button) root.findViewById(R.id.button_erase);
-        mBtnDot = (Button) root.findViewById(R.id.button_dot);
+        mBtn0 = root.findViewById(R.id.button_0);
+        mBtn1 = root.findViewById(R.id.button_1);
+        mBtn2 = root.findViewById(R.id.button_2);
+        mBtn3 = root.findViewById(R.id.button_3);
+        mBtn4 = root.findViewById(R.id.button_4);
+        mBtn5 = root.findViewById(R.id.button_5);
+        mBtn6 = root.findViewById(R.id.button_6);
+        mBtn7 = root.findViewById(R.id.button_7);
+        mBtn8 = root.findViewById(R.id.button_8);
+        mBtn9 = root.findViewById(R.id.button_9);
+        mBtn00 = root.findViewById(R.id.button_double_zero);
+        mBtnC = root.findViewById(R.id.button_clear);
+        mBtnE = root.findViewById(R.id.button_erase);
+        mBtnDot = root.findViewById(R.id.button_dot);
 
         subscribe();
 
@@ -136,6 +136,18 @@ public class KeyboardFragment extends Fragment {
             }
         };
 
+        View.OnClickListener onClearClick = v -> mConverterViewModel.clear();
+
+        View.OnClickListener onEraseClick = v -> mConverterViewModel.erase();
+
+        View.OnClickListener onDotClick = v -> mConverterViewModel.addDot();
+
+        View.OnLongClickListener onLongEraseClick = v -> {
+            mConverterViewModel.clear();
+            return false;
+        };
+
+
         mBtn0.setOnClickListener(onDigitClick);
         mBtn1.setOnClickListener(onDigitClick);
         mBtn2.setOnClickListener(onDigitClick);
@@ -147,5 +159,9 @@ public class KeyboardFragment extends Fragment {
         mBtn8.setOnClickListener(onDigitClick);
         mBtn9.setOnClickListener(onDigitClick);
         mBtn00.setOnClickListener(onDigitClick);
+        mBtnC.setOnClickListener(onClearClick);
+        mBtnE.setOnClickListener(onEraseClick);
+        mBtnE.setOnLongClickListener(onLongEraseClick);
+        mBtnDot.setOnClickListener(onDotClick);
     }
 }
