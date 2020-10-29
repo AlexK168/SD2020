@@ -9,4 +9,6 @@ public class Utils {
                 .map(sStr -> sStr.substring(0, sStr.length() - 1))
                 .orElse(str);
     }
+
+
 }
