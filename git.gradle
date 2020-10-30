@@ -20,7 +20,7 @@ def getLastTag() {
     }
     def res = tagsOutput.toString()
     if (res.contains('-')) {
-        return res.split('-').first()
+        return res.split('-').first().substring(1).trim()
     } else {
         return res.substring(1).trim()
     }
