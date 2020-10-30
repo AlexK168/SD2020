@@ -2,6 +2,11 @@ plugins {
     id 'com.android.application'
 }
 
+apply from: '../git.gradle'
+
+def tag = getLastTag()
+def patch = getPatch()
+
 android {
     compileSdkVersion 30
     buildToolsVersion "30.0.2"
@@ -10,8 +15,8 @@ android {
         applicationId "com.example.converter"
         minSdkVersion 28
         targetSdkVersion 30
-        versionCode 1
-        versionName "1.0"
+        versionCode generateVersionCode(tag , patch)
+        versionName "${tag}.${patch}"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -39,3 +44,4 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
 }
+
