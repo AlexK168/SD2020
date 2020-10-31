@@ -7,66 +7,51 @@ import androidx.annotation.RequiresApi;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import java.util.Map;
+import com.example.converter.categories.Category;
+import com.example.converter.categories.LengthCategory;
+import com.example.converter.categories.MassCategory;
+import com.example.converter.categories.SpeedCategory;
 
-import static java.util.Map.entry;
+import java.util.Arrays;
 
 @RequiresApi(api = Build.VERSION_CODES.R)
 public class ConverterViewModel extends ViewModel {
-    public MutableLiveData<String> input = new MutableLiveData<>();
-    public MutableLiveData<String> output = new MutableLiveData<>();
+
+    private final MutableLiveData<String> input = new MutableLiveData<>();
+    private final MutableLiveData<String> output = new MutableLiveData<>();
+    private final MutableLiveData<Category> category = new MutableLiveData<>();
 
     private static final Integer LIMIT = 14;
+    public static final String LENGTH = "length";
+    public static final String SPEED = "currency";
+    public static final String MASS = "mass";
 
-    private String inputUnit;
-    private String outputUnit;
-
-    public static final String[] length_units = {
-            "in", "ft", "yd", "mi",
-            "mm", "cm", "m", "km"
-    };
-
-    public static final String[] mass_units = {
-            "mg", "g", "kg", "t",
-            "oz", "lb", "st", "t(US)"
-    };
-
-    public static final Map<String, Double> weights = Map.ofEntries(
-            entry("in", 63360.0),
-            entry("ft", 5280.0),
-            entry("yd", 1760.0),
-            entry("mi", 1.0),
-            entry("mm", 1609344.0),
-            entry("cm", 160934.4),
-            entry("m", 1609.344),
-            entry("km", 1.609344),
-
-            entry("t(US)", 1.0),
-            entry("st", 142.857142857),
-            entry("lb", 2000.0),
-            entry("oz", 32000.0),
-            entry("mg", 907183761.411),
-            entry("g", 907183.761411),
-            entry("kg", 907.183761411),
-            entry("t", 0.907183761411)
-    );
-
-
-    // kinda conversion
-    private double someFunc(double inputValue) {
-        return inputValue + 1;
-    }
+    private static String inputUnit;
+    private static String outputUnit;
 
     public ConverterViewModel() {
+        Log.d("ViewModel", "Constructor");
         input.setValue("");
-
+        category.setValue(new MassCategory());
         output.setValue("");
+    }
+
+    public MutableLiveData<String> getInput() {
+        return input;
+    }
+
+    public MutableLiveData<String> getOutput() {
+        return output;
+    }
+
+    public MutableLiveData<Category> getCategory() {
+        return category;
     }
 
     void clear() {
+        Log.d("ViewModel", "clear method");
         input.setValue("");
         output.setValue("");
-        convert();
     }
 
     void erase() {
@@ -110,10 +95,31 @@ public class ConverterViewModel extends ViewModel {
         }
         else {
             double tmp = Double.parseDouble(inputString);
-            double in_koeff = weights.get(inputUnit);
-            double out_koeff = weights.get(outputUnit);
-            output.setValue(Double.toString(out_koeff / in_koeff * tmp));
+            double inputRate = category.getValue().get(inputUnit);
+            double outputRate = category.getValue().get(outputUnit);
+            output.setValue(Double.toString(outputRate / inputRate * tmp));
         }
     }
 
+    String[] getUnitsList() {
+        return category.getValue().units();
+    }
+
+    void setCategory(String option) {
+        if (option.equals(MASS)) {
+            category.setValue(new MassCategory());
+        }else
+        if(option.equals(LENGTH)) {
+            category.setValue(new LengthCategory());
+        }
+        if(option.equals(SPEED)) {
+            category.setValue(new SpeedCategory());
+        }
+    }
+
+    void setDefaultUnits() {
+        String[] tmp = category.getValue().units();
+        inputUnit = tmp[0];
+        outputUnit = tmp[0];
+    }
 }

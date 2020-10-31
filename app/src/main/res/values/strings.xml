@@ -17,6 +17,9 @@
     <string name="button_double_zero_caption">00</string>
     <string name="button_erase_caption">ERASE</string>
     <string name="button_c_caption">C</string>
+    <string name="length_button_caption">Length</string>
+    <string name="mass_button_caption">Mass</string>
+    <string name="speed_button_caption">Speed</string>
 
     <string-array name="length_units_array">
         <item>in</item>
