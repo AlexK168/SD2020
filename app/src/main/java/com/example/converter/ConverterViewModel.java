@@ -122,4 +122,8 @@ public class ConverterViewModel extends ViewModel {
         inputUnit = tmp[0];
         outputUnit = tmp[0];
     }
+
+    void setInput(String value) {
+        input.setValue(value);
+    }
 }

@@ -13,7 +13,7 @@ android {
 
     defaultConfig {
         applicationId "com.example.converter"
-        minSdkVersion 28
+        minSdkVersion 24
         targetSdkVersion 30
         versionCode generateVersionCode(tag , patch)
         versionName "${tag}.${patch}"
@@ -26,10 +26,34 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
+        debug {
+            applicationIdSuffix ".debug"
+            debuggable true
+        }
+    }
+    flavorDimensions "version"
+    productFlavors {
+        free {
+            dimension "version"
+            applicationIdSuffix ".free"
+            versionNameSuffix "-free"
+        }
+        pro {
+            dimension "version"
+            applicationIdSuffix ".pro"
+            versionNameSuffix "-pro"
+        }
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
+    }
+    sourceSets {
+        pro {
+            java {
+                srcDirs 'src/pro/java'
+            }
+        }
     }
 }
 

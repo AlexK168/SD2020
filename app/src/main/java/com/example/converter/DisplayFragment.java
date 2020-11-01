@@ -1,6 +1,8 @@
 package com.example.converter;
 
 import android.annotation.SuppressLint;
+import android.content.ClipData;
+import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
 
@@ -16,28 +18,32 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.content.ClipboardManager;
+import android.widget.Toast;
 
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link DisplayFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
+
 public class DisplayFragment extends Fragment {
 
-    private TextView mInputTextView;
-    private TextView mOutputTextView;
-    private Spinner mInputSpinner;
-    private Spinner mOutputSpinner;
-    private ConverterViewModel mConverterViewModel;
+    protected TextView mInputTextView;
+    protected TextView mOutputTextView;
+    protected Spinner mInputSpinner;
+    protected Spinner mOutputSpinner;
+    protected ConverterViewModel mConverterViewModel;
 
-    private RadioButton mMassButton;
-    private RadioButton mLengthButton;
-    private RadioButton mCurrencyButton;
-    private RadioGroup mRadioGroup;
+    protected RadioButton mMassButton;
+    protected RadioButton mLengthButton;
+    protected RadioButton mCurrencyButton;
+    protected RadioGroup mRadioGroup;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -86,6 +92,14 @@ public class DisplayFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         View root = inflater.inflate(R.layout.fragment_display, container, false);
+        findViews(root);
+        subscribe();
+
+        return root;
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.R)
+    protected void findViews(View root) {
         mInputTextView = root.findViewById(R.id.textView_input);
         mOutputTextView = root.findViewById(R.id.textView_output);
         mInputSpinner = root.findViewById(R.id.spinner_input);
@@ -98,16 +112,9 @@ public class DisplayFragment extends Fragment {
         mConverterViewModel = new ViewModelProvider(requireActivity()).get(ConverterViewModel.class);
         ArrayAdapter<String> adapter = new ArrayAdapter<>(requireContext(),
                 R.layout.my_spinner_item, mConverterViewModel.getUnitsList());
-
         adapter.setDropDownViewResource(R.layout.my_spinner_dropdown_item);
-
         mInputSpinner.setAdapter(adapter);
         mOutputSpinner.setAdapter(adapter);
-
-
-        subscribe();
-
-        return root;
     }
 
     @RequiresApi(api = Build.VERSION_CODES.R)
@@ -135,7 +142,6 @@ public class DisplayFragment extends Fragment {
                     adapter.setDropDownViewResource(R.layout.my_spinner_dropdown_item);
                     mInputSpinner.setAdapter(adapter);
                     mOutputSpinner.setAdapter(adapter);
-                    Log.d("DisplayFragment", "category observer");
                     mConverterViewModel.setDefaultUnits();
                 }
         );
