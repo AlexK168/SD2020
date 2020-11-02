@@ -8,6 +8,14 @@ def tag = getLastTag()
 def patch = getPatch()
 
 android {
+    signingConfigs {
+        config {
+            storeFile file('/home/alex/keystores/upload-keystore.jks')
+            storePassword 'keystoreKUK319com'
+            keyAlias 'key0'
+            keyPassword 'keyKUK319com'
+        }
+    }
     compileSdkVersion 30
     buildToolsVersion "30.0.2"
 
@@ -25,6 +33,7 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.config
         }
         debug {
             applicationIdSuffix ".debug"
