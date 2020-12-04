@@ -1,5 +1,7 @@
+# SD2020
 Software design projects
 
-This is Converter app(Lab 1)
-
 Kulsha Alexander, 853506
+
+Lab1 - Converter
+
