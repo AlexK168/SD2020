@@ -1,0 +1,34 @@
+<resources>
+    <string name="app_name">Converter</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="display_fragment_header">This is DisplayFragment</string>
+    <string name="keyboard_fragment_header">This is KeyboardFragment</string>
+    <string name="button_1_caption">1</string>
+    <string name="button_2_caption">2</string>
+    <string name="button_3_caption">3</string>
+    <string name="button_4_caption">4</string>
+    <string name="button_5_caption">5</string>
+    <string name="button_6_caption">6</string>
+    <string name="button_7_caption">7</string>
+    <string name="button_8_caption">8</string>
+    <string name="button_9_caption">9</string>
+    <string name="button_0_caption">0</string>
+    <string name="button_dot_caption">.</string>
+    <string name="button_double_zero_caption">00</string>
+    <string name="button_erase_caption">ERASE</string>
+    <string name="button_c_caption">C</string>
+    <string name="length_button_caption">Length</string>
+    <string name="mass_button_caption">Mass</string>
+    <string name="speed_button_caption">Speed</string>
+
+    <string-array name="length_units_array">
+        <item>in</item>
+        <item>ft</item>
+        <item>yd</item>
+        <item>mi</item>
+        <item>mm</item>
+        <item>cm</item>
+        <item>m</item>
+        <item>km</item>
+    </string-array>
+</resources>
