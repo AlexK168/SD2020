@@ -10,5 +10,6 @@
     <string name="enter_time">enter time</string>
     <string name="todo">TODO</string>
     <string name="pick_color_cap">choose color</string>
-    <string name="todo">TODO</string>
+    <string name="timer_time">30</string>
+    <string name="button_edit">edit</string>
 </resources>

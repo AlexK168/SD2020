@@ -5,49 +5,39 @@ import android.os.AsyncTask;
 
 import androidx.lifecycle.LiveData;
 
-import com.example.awesometimer.Models.Phase;
+import com.example.awesometimer.Models.Item;
 import com.example.awesometimer.Models.Sequence;
-import com.example.awesometimer.Models.SequenceWithItems;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Repository {
 
     private SequenceDao mSequenceDao;
-    private PhaseDao mPhaseDao;
     private ItemDao mItemDao;
 
     private LiveData<List<Sequence>> mAllSequences;
-    private LiveData<List<Phase>> mAllPhases;
-    private LiveData<List<SequenceWithItems>> mSequencesWithItems;
+
 
     public Repository(Application application) {
         AppDatabase db = AppDatabase.getDatabase(application);
         mSequenceDao = db.SequenceDao();
-        mPhaseDao = db.PhaseDao();
+        mItemDao = db.ItemDao();
 
         mAllSequences = mSequenceDao.getAllSequences();
-        mSequencesWithItems = mSequenceDao.getSequencesWithItems();
-        mAllPhases = mPhaseDao.getAllPhases();
     }
 
-    public LiveData<List<Sequence>> getAllSequences() {
-        return mAllSequences;
-    }
-    public LiveData<List<Phase>> getAllPhases() {
-        return mAllPhases;
-    }
-    public LiveData<List<SequenceWithItems>> getSequencesWithItems() {
-        return mSequencesWithItems;
+    public LiveData<List<Sequence>> getAllSequences() { return mAllSequences; }
+
+    public LiveData<List<Item>> getItems(int id) {
+        return mItemDao.getItems(id);
     }
 
     public void insert(Sequence seq) { new insertSequenceAsyncTask(mSequenceDao).execute(seq);}
     public void update(Sequence seq) { new updateSequenceAsyncTask(mSequenceDao).execute(seq);}
     public void delete(Sequence seq) { new deleteSeqAsyncTask(mSequenceDao).execute(seq);}
-    public void insert(Phase phase) { new insertPhaseAsyncTask(mPhaseDao).execute(phase);}
-    public void update(Phase phase) { new updatePhaseAsyncTask(mPhaseDao).execute(phase);}
-    public void delete(Phase phase) { new deletePhaseAsyncTask(mPhaseDao).execute(phase);}
-
+    public void insert(ArrayList<Item> items) {new insertItemsAsyncTask(mItemDao).execute(items);}
+    public void insert(Item item) { new insertItemAsyncTask(mItemDao).execute(item);}
 
     private static class insertSequenceAsyncTask extends AsyncTask<Sequence, Void, Void> {
 
@@ -64,32 +54,34 @@ public class Repository {
         }
     }
 
-    private static class insertPhaseAsyncTask extends AsyncTask<Phase, Void, Void> {
+    private static class insertItemAsyncTask extends AsyncTask<Item, Void, Void> {
 
-        private PhaseDao mAsyncTaskDao;
+        private ItemDao mAsyncTaskDao;
 
-        insertPhaseAsyncTask(PhaseDao dao) {
+        insertItemAsyncTask(ItemDao dao) {
             mAsyncTaskDao = dao;
         }
 
         @Override
-        protected Void doInBackground(final Phase... params) {
+        protected Void doInBackground(final Item... params) {
             mAsyncTaskDao.insert(params[0]);
             return null;
         }
     }
 
-    private static class updatePhaseAsyncTask extends AsyncTask<Phase, Void, Void> {
+    private static class insertItemsAsyncTask extends AsyncTask<ArrayList<Item>, Void, Void> {
 
-        private PhaseDao mAsyncTaskDao;
+        private ItemDao mAsyncTaskDao;
 
-        updatePhaseAsyncTask(PhaseDao dao) {
+        insertItemsAsyncTask(ItemDao dao) {
             mAsyncTaskDao = dao;
         }
 
         @Override
-        protected Void doInBackground(final Phase... params) {
-            mAsyncTaskDao.update(params[0]);
+        protected Void doInBackground(final ArrayList<Item>... params) {
+            for (Item i : params[0]) {
+                mAsyncTaskDao.insert(i);
+            }
             return null;
         }
     }
@@ -105,20 +97,6 @@ public class Repository {
         @Override
         protected Void doInBackground(final Sequence... params) {
             mAsyncTaskDao.update(params[0]);
-            return null;
-        }
-    }
-
-    private static class deletePhaseAsyncTask extends AsyncTask<Phase, Void, Void> {
-        private PhaseDao mAsyncTaskDao;
-
-        deletePhaseAsyncTask(PhaseDao dao) {
-            mAsyncTaskDao = dao;
-        }
-
-        @Override
-        protected Void doInBackground(final Phase... params) {
-            mAsyncTaskDao.delete(params[0]);
             return null;
         }
     }

@@ -12,6 +12,14 @@
         android:hint="@string/phase_hint_word"
         android:inputType="textAutoComplete" />
 
+
+    <EditText
+        android:id="@+id/editTextTime2"
+        style="@style/text_view_style"
+        android:hint="@string/timer_time"
+        android:ems="10"
+        android:inputType="time" />
+
     <Button
         android:id="@+id/button_save"
         style="@style/button_style"

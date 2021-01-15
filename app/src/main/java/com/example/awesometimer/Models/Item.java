@@ -3,15 +3,16 @@ package com.example.awesometimer.Models;
 
 import androidx.annotation.NonNull;
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 @Entity
 public class Item {
 
-    public Item(@NonNull int duration, @NonNull int id_phase, @NonNull int id_sequence) {
+    public Item(@NonNull int duration, @NonNull int id_sequence, @NonNull String phase) {
         this.duration = duration;
-        this.id_phase = id_phase;
         this.id_sequence = id_sequence;
+        this.phase = phase;
     }
 
     @NonNull
@@ -22,7 +23,7 @@ public class Item {
     public int duration;
 
     @NonNull
-    public int id_phase;
+    public String phase;
 
     @NonNull
     public int id_sequence;

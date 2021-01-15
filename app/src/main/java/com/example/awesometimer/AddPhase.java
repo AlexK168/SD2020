@@ -12,10 +12,14 @@ import android.widget.Toast;
 
 public class AddPhase extends AppCompatActivity {
 
-    public static final String EXTRA_REPLY =
-            "com.example.android.awesomeTimer.REPLY";
+    public static final String PHASE_EXTRA_REPLY =
+            "com.example.android.awesomeTimer.PHASE_REPLY";
+
+    public static final String TIME_EXTRA_REPLY =
+            "com.example.android.awesomeTimer.TIME_REPLY";
 
     private EditText mEditWordView;
+    private EditText mEditTimeView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,10 +27,7 @@ public class AddPhase extends AppCompatActivity {
         setContentView(R.layout.activity_add_phase);
 
         mEditWordView = findViewById(R.id.edit_word);
-        String hint = getIntent().getStringExtra(PhasesActivity.HINT_VALUE);
-        if (hint != null) {
-            mEditWordView.setHint(hint);
-        }
+        mEditTimeView = findViewById(R.id.editTextTime2);
 
         final Button button = findViewById(R.id.button_save);
         button.setOnClickListener(view -> {
@@ -35,7 +36,9 @@ public class AddPhase extends AppCompatActivity {
                 setResult(RESULT_CANCELED, replyIntent);
             } else {
                 String phase = mEditWordView.getText().toString();
-                replyIntent.putExtra(EXTRA_REPLY, phase);
+                int time = Integer.parseInt(mEditTimeView.getText().toString());
+                replyIntent.putExtra(PHASE_EXTRA_REPLY, phase);
+                replyIntent.putExtra(TIME_EXTRA_REPLY, time);
                 setResult(RESULT_OK, replyIntent);
             }
             finish();

@@ -22,9 +22,18 @@
         android:orientation="vertical">
 
         <Button
-            android:id="@+id/button_save"
-            style="@style/button_style"
-            android:text="@string/button_save" />
+            android:id="@+id/pick_color"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/pick_color_cap" />
+
+        <EditText
+            android:id="@+id/edit_word"
+            style="@style/text_view_style"
+            android:layout_height="wrap_content"
+            android:hint="@string/hint_word"
+            android:inputType="textAutoComplete"
+            android:autofillHints="" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerview"
@@ -39,18 +48,9 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <Button
-            android:id="@+id/pick_color"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/pick_color_cap" />
-
-        <EditText
-            android:id="@+id/edit_word"
-            style="@style/text_view_style"
-            android:layout_height="wrap_content"
-            android:hint="@string/hint_word"
-            android:inputType="textAutoComplete"
-            android:autofillHints="" />
+            android:id="@+id/button_save"
+            style="@style/button_style"
+            android:text="@string/button_save" />
     </LinearLayout>
 
 

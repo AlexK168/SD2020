@@ -6,12 +6,9 @@ import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
-import androidx.room.Transaction;
 import androidx.room.Update;
 
-import com.example.awesometimer.Models.Phase;
 import com.example.awesometimer.Models.Sequence;
-import com.example.awesometimer.Models.SequenceWithItems;
 
 import java.util.List;
 
@@ -35,12 +32,5 @@ public interface SequenceDao {
     @Query("SELECT * from Sequence WHERE id = :id") // get sequence with specified id
     LiveData<Sequence> getSequence(int id);
 
-    @Transaction                                    // get Sequences with items
-    @Query("SELECT * FROM Sequence")
-    public LiveData<List<SequenceWithItems>> getSequencesWithItems();
-
-    @Transaction                                    // get Sequence with specified id with items
-    @Query("SELECT * FROM Sequence WHERE id = :id")
-    public LiveData<SequenceWithItems> getSequenceWithItems(int id);
 
 }
