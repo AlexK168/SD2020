@@ -20,16 +20,16 @@ public interface SequenceDao {
     @Delete
     void delete(Sequence seq); // delete sequence
 
+    @Query("DELETE from Item WHERE id_sequence = :seq_id")
+    void delete(int seq_id);
+
     @Update
     void update(Sequence seq); // update sequence
-
-    @Query("DELETE FROM Sequence") // clear all sequences
-    void deleteAll();
 
     @Query("SELECT * from Sequence ORDER BY title ASC")  // get all sequences
     LiveData<List<Sequence>> getAllSequences();
 
-    @Query("SELECT * from Sequence WHERE id = :id") // get sequence with specified id
+    @Query("SELECT * from Sequence WHERE id = :id LIMIT 1") // get sequence with specified id
     LiveData<Sequence> getSequence(int id);
 
 

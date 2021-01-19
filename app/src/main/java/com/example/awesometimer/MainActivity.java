@@ -1,5 +1,6 @@
 package com.example.awesometimer;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.ItemTouchHelper;
@@ -9,7 +10,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.awesometimer.Adapters.SequenceAdapter;
@@ -41,13 +41,16 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemClick(int position, View v) {
                 // start timer here
-//                Sequence selectedSeq  = adapter.getItem(position);
-//                mSeqViewModel.setSelectedSeq(selectedSeq);
-//                Intent intent = new Intent(MainActivity.this, AddSequence.class);
-//                intent.putExtra(SEQUENCE_COLOR, selectedSeq.color);
-//                intent.putExtra(SEQUENCE_TITLE, selectedSeq.title);
-//                intent.putExtra(SEQUENCE_ID, selectedSeq.id);
-//                startActivityForResult(intent, EDIT_SEQUENCE_ACTIVITY_REQUEST_CODE);
+            }
+
+            @Override
+            public void onEditClick(int position) {
+                Intent intent = new Intent(MainActivity.this, EditSequence.class);
+                Sequence s = adapter.getItem(position);
+                intent.putExtra(SEQUENCE_ID, s.id);
+                intent.putExtra(SEQUENCE_TITLE, s.title);
+                intent.putExtra(SEQUENCE_COLOR, s.color);
+                startActivityForResult(intent, EDIT_SEQUENCE_ACTIVITY_REQUEST_CODE);
             }
         });
 
@@ -56,12 +59,10 @@ public class MainActivity extends AppCompatActivity {
 
         mSeqViewModel.getAllSequences().observe(this, adapter::setSequences);
 
-        Button.OnClickListener onFabClicked = v -> {
+        addSeq.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, AddSequence.class);
             startActivityForResult(intent, NEW_SEQUENCE_ACTIVITY_REQUEST_CODE);
-        };
-
-        addSeq.setOnClickListener(onFabClicked);
+        });
 
         mSeqViewModel.getAllSequences().observe(this, adapter::setSequences);
 
@@ -69,14 +70,14 @@ public class MainActivity extends AppCompatActivity {
                 new ItemTouchHelper.SimpleCallback(0,
                         ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
                     @Override
-                    public boolean onMove(RecyclerView recyclerView,
-                                          RecyclerView.ViewHolder viewHolder,
-                                          RecyclerView.ViewHolder target) {
+                    public boolean onMove(@NonNull RecyclerView recyclerView,
+                                          @NonNull RecyclerView.ViewHolder viewHolder,
+                                          @NonNull RecyclerView.ViewHolder target) {
                         return false;
                     }
 
                     @Override
-                    public void onSwiped(RecyclerView.ViewHolder viewHolder,
+                    public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder,
                                          int direction) {
                         int position = viewHolder.getAdapterPosition();
                         Sequence sequence = adapter.getItem(position);
@@ -87,17 +88,5 @@ public class MainActivity extends AppCompatActivity {
                 });
 
         helper.attachToRecyclerView(recyclerView);
-    }
-
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-//        int newColor = data.getIntExtra(AddSequence.COLOR_EXTRA_REPLY, 1);
-//        String newTitle = data.getStringExtra(AddSequence.TITLE_EXTRA_REPLY);
-//        if (requestCode == NEW_SEQUENCE_ACTIVITY_REQUEST_CODE && resultCode == RESULT_OK) {
-//            Sequence seq = new Sequence(newTitle, newColor);
-//            mSeqViewModel.insert(seq);
-//        } else if (requestCode == EDIT_SEQUENCE_ACTIVITY_REQUEST_CODE && resultCode == RESULT_OK) {
-//            mSeqViewModel.updateSelectedSeq(newTitle, newColor);
-//        }
     }
 }

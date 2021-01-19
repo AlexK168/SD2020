@@ -22,15 +22,8 @@ public interface ItemDao {
     @Update
     void update(Item item); // update item
 
-    @Query("DELETE FROM Item") // clear all items
-    void deleteAll();
-
-    @Query("SELECT * from Item WHERE id = :id") // get item with specified id
-    LiveData<Item> getItem(int id);
-
-    @Query("SELECT * from Item") // get all items
-    LiveData<List<Item>> getAllItems();
-
     @Query("SELECT * from Item where id_sequence = :id") // get all items of sequence
     LiveData<List<Item>> getItems(int id);
+
+
 }

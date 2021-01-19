@@ -9,7 +9,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AwesomeTimer">
-        <activity android:name=".AddPhase" />
+        <activity android:name=".Stages"></activity>
+        <activity
+            android:name=".EditSequence"
+            android:label="@string/title_activity_edit_sequence"
+            android:theme="@style/Theme.AwesomeTimer.NoActionBar" />
+        <activity android:name=".AddStage" />
         <activity android:name=".AddSequence" />
         <activity android:name=".MainActivity">
             <intent-filter>

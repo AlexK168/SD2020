@@ -1,11 +1,10 @@
 package com.example.awesometimer.Adapters;
 
 import android.content.Context;
-import android.graphics.Color;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -38,7 +37,7 @@ public class SequenceAdapter extends RecyclerView.Adapter<SequenceAdapter.Sequen
             holder.sequenceItemView.setText(current.title);
             holder.sequenceItemView.setBackgroundColor(current.color);
         } else {
-            holder.sequenceItemView.setText("No Sequences yet");
+            holder.sequenceItemView.setText(R.string.no_sequences);
         }
     }
 
@@ -58,11 +57,14 @@ public class SequenceAdapter extends RecyclerView.Adapter<SequenceAdapter.Sequen
 
     static class SequenceViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         private final TextView sequenceItemView;
+        private Button editButton;
 
         private SequenceViewHolder(View itemView) {
             super(itemView);
             itemView.setOnClickListener(this);
             sequenceItemView = itemView.findViewById(R.id.textView);
+            editButton = itemView.findViewById(R.id.seq_edit_button);
+            editButton.setOnClickListener(v -> clickListener.onEditClick(getAdapterPosition()));
         }
 
         @Override
@@ -77,5 +79,6 @@ public class SequenceAdapter extends RecyclerView.Adapter<SequenceAdapter.Sequen
 
     public interface ClickListener {
         void onItemClick(int position, View v);
+        void onEditClick(int position);
     }
 }

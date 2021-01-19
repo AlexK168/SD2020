@@ -1,21 +1,15 @@
 package com.example.awesometimer.Adapters;
 
-import android.content.ClipData;
 import android.content.Context;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.awesometimer.MainActivity;
 import com.example.awesometimer.Models.Item;
 import com.example.awesometimer.R;
 
@@ -74,12 +68,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
             phaseItemView = itemView.findViewById(R.id.textView);
             timeItemView = itemView.findViewById(R.id.timeTextView);
             editButton = itemView.findViewById(R.id.button);
-            editButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    clickListener.onItemClick(getAdapterPosition(), v);
-                }
-            });
+            editButton.setOnClickListener(v -> clickListener.onItemEditClick(getAdapterPosition(), v));
         }
     }
 
@@ -89,6 +78,6 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
     }
 
     public interface ClickListener {
-        void onItemClick(int position, View v);
+        void onItemEditClick(int position, View v);
     }
 }

@@ -8,16 +8,18 @@ import androidx.room.RoomDatabase;
 
 import com.example.awesometimer.Models.Item;
 import com.example.awesometimer.Models.Sequence;
+import com.example.awesometimer.Models.Stage;
 
-@Database(entities = {Sequence.class, Item.class}, version = 3, exportSchema = false)
+@Database(entities = {Sequence.class, Item.class, Stage.class}, version = 4, exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase {
 
     public abstract SequenceDao SequenceDao();
     public abstract ItemDao ItemDao();
+    public abstract StageDao StageDao();
 
     private static AppDatabase INSTANCE;
 
-    static AppDatabase getDatabase(final Context context) {
+    public static AppDatabase getDatabase(final Context context) {
         if (INSTANCE == null) {
             synchronized (AppDatabase.class) {
                 if (INSTANCE == null) {
