@@ -1,4 +1,4 @@
-package com.example.awesometimer;
+package com.example.awesometimer.Activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import com.example.awesometimer.Adapters.SequenceAdapter;
 import com.example.awesometimer.Models.Sequence;
+import com.example.awesometimer.R;
 import com.example.awesometimer.ViewModels.SequenceViewModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 

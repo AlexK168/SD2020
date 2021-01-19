@@ -1,4 +1,4 @@
-package com.example.awesometimer;
+package com.example.awesometimer.Activities;
 
 import android.content.Intent;
 import android.graphics.Color;
@@ -6,7 +6,7 @@ import android.os.Bundle;
 
 import com.example.awesometimer.Adapters.ItemAdapter;
 import com.example.awesometimer.Models.Item;
-import com.example.awesometimer.Models.Sequence;
+import com.example.awesometimer.R;
 import com.example.awesometimer.ViewModels.EditSeqViewModelFactory;
 import com.example.awesometimer.ViewModels.EditSequenceViewModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -16,22 +16,21 @@ import com.jaredrummler.android.colorpicker.ColorShape;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.ViewModelProviders;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import java.util.function.LongFunction;
-
 public class EditSequence extends AppCompatActivity implements ColorPickerDialogListener {
     public static final int NEW_ITEM_ACTIVITY_REQUEST_CODE = 1;
+    public static final int EDIT_ITEM_ACTIVITY_REQUEST_CODE = 2;
+    public static String ITEM_PHASE = "com.example.android.awesomeTimer.ITEM_PHASE";
+    public static String ITEM_DURATION = "com.example.android.awesomeTimer.ITEM_DURATION";
     private static final int firstId = 1;
     private EditSequenceViewModel mEditSequenceViewModel;
     private EditText mEditWordView;
@@ -75,8 +74,12 @@ public class EditSequence extends AppCompatActivity implements ColorPickerDialog
         RecyclerView recyclerView = findViewById(R.id.recyclerview);
         final ItemAdapter adapter = new ItemAdapter(this);
         adapter.setOnItemClickListener((position, v) -> {
-            Log.e("Edit Sequence", "Edit item clicked");
-            //
+            Item i = adapter.getItem(position);
+            mEditSequenceViewModel.setItem(i);
+            Intent editIntent = new Intent(EditSequence.this, EditItem.class);
+            editIntent.putExtra(ITEM_DURATION, i.duration);
+            editIntent.putExtra(ITEM_PHASE, i.phase);
+            startActivityForResult(editIntent, EDIT_ITEM_ACTIVITY_REQUEST_CODE);
         });
 
         ItemTouchHelper helper = new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0,ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
@@ -108,10 +111,17 @@ public class EditSequence extends AppCompatActivity implements ColorPickerDialog
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK) {
-            String phase = data.getStringExtra(AddStage.PHASE_EXTRA_REPLY);
-            int time = 30;
-            Item item = new Item(time, mEditSequenceViewModel.id_seq(), phase);
-            mEditSequenceViewModel.insert(item);
+            if (requestCode == NEW_ITEM_ACTIVITY_REQUEST_CODE) {
+                String phase = data.getStringExtra(AddStage.PHASE_EXTRA_REPLY);
+                int time = 30;
+                Item item = new Item(time, mEditSequenceViewModel.id_seq(), phase);
+                mEditSequenceViewModel.insert(item);
+            } else if (requestCode == EDIT_ITEM_ACTIVITY_REQUEST_CODE) {
+                String phase = data.getStringExtra(EditItem.PHASE_EXTRA_REPLY);
+                int time = data.getIntExtra(EditItem.TIME_EXTRA_REPLY, 30);
+                mEditSequenceViewModel.updateItem(phase, time);
+            }
+
         }
     }
 

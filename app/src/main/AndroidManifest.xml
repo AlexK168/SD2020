@@ -9,14 +9,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AwesomeTimer">
-        <activity android:name=".Stages"></activity>
+        <activity android:name=".Activities.EditItem"></activity>
+        <activity android:name=".Activities.Stages" />
         <activity
-            android:name=".EditSequence"
+            android:name=".Activities.EditSequence"
             android:label="@string/title_activity_edit_sequence"
             android:theme="@style/Theme.AwesomeTimer.NoActionBar" />
-        <activity android:name=".AddStage" />
-        <activity android:name=".AddSequence" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".Activities.AddStage" />
+        <activity android:name=".Activities.AddSequence" />
+        <activity android:name=".Activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -1,4 +1,4 @@
-package com.example.awesometimer;
+package com.example.awesometimer.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProviders;
@@ -7,10 +7,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 
 import com.example.awesometimer.Adapters.StageAdapter;
 import com.example.awesometimer.Models.Stage;
+import com.example.awesometimer.R;
 import com.example.awesometimer.ViewModels.StageViewModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 

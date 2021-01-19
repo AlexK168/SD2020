@@ -35,7 +35,8 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
         if (mItems != null) {
             Item current = mItems.get(position);
             holder.phaseItemView.setText(current.phase);
-            holder.timeItemView.setText(String.valueOf(current.duration));
+            String result = current.duration + " s";
+            holder.timeItemView.setText(result);
 
         } else {
             holder.phaseItemView.setText(R.string.no_phases_yet);

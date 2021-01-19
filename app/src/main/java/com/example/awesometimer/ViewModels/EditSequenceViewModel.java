@@ -19,6 +19,7 @@ public class EditSequenceViewModel extends AndroidViewModel {
     private SequenceRepo mSeqRepo;
 
     private Sequence sequence;
+    private Item item;
     private int id;
 
     private LiveData<List<Item>> mItems;
@@ -33,6 +34,8 @@ public class EditSequenceViewModel extends AndroidViewModel {
         sequence.id = param;
     }
 
+    public void setItem(Item item) { this.item = item; }
+
     public void insert(Item item) {
         mItemRepo.insert(item);
     }
@@ -45,6 +48,12 @@ public class EditSequenceViewModel extends AndroidViewModel {
 
     public void setTitle(String title) {
         sequence.title = title;
+    }
+
+    public void updateItem(String phase, int time) {
+        item.phase = phase;
+        item.duration = time;
+        mItemRepo.update(item);
     }
 
     public int color() {

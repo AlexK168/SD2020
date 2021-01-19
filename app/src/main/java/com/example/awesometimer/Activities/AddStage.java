@@ -1,4 +1,4 @@
-package com.example.awesometimer;
+package com.example.awesometimer.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -9,6 +9,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import com.example.awesometimer.R;
 
 public class AddStage extends AppCompatActivity {
 

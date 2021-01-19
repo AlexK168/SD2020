@@ -23,4 +23,8 @@
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="no_stages">No Stages yet</string>
     <string name="no_sequences">No Sequences yet</string>
+    <string name="hours">hours</string>
+    <string name="mins">minutes</string>
+    <string name="secs">seconds</string>
+    <string name="zero">0</string>
 </resources>

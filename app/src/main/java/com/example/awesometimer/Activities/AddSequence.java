@@ -1,4 +1,4 @@
-package com.example.awesometimer;
+package com.example.awesometimer.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProviders;
@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.awesometimer.R;
 import com.example.awesometimer.ViewModels.AddSequenceViewModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.jaredrummler.android.colorpicker.ColorPickerDialog;
