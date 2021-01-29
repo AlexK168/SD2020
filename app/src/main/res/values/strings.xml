@@ -27,4 +27,7 @@
     <string name="mins">minutes</string>
     <string name="secs">seconds</string>
     <string name="zero">0</string>
+    <string name="none">none</string>
+    <string name="stop_button">stop</string>
+
 </resources>

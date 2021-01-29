@@ -2,9 +2,6 @@ package com.example.awesometimer.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProviders;
-import androidx.recyclerview.widget.ItemTouchHelper;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.graphics.Color;
@@ -16,14 +13,11 @@ import android.widget.Toast;
 
 import com.example.awesometimer.R;
 import com.example.awesometimer.ViewModels.AddSequenceViewModel;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.jaredrummler.android.colorpicker.ColorPickerDialog;
 import com.jaredrummler.android.colorpicker.ColorPickerDialogListener;
 import com.jaredrummler.android.colorpicker.ColorShape;
 
 public class AddSequence extends AppCompatActivity implements ColorPickerDialogListener {
-    public static final String COLOR_EXTRA_REPLY = "com.example.android.awesomeTimer.COLOR_REPLY";
-    public static final String TITLE_EXTRA_REPLY = "com.example.android.awesomeTimer.TITLE_REPLY";
     private static final int firstId = 1;
 
     private EditText mEditWordView;

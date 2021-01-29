@@ -13,10 +13,13 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.example.awesometimer.Adapters.SequenceAdapter;
+import com.example.awesometimer.Models.Item;
 import com.example.awesometimer.Models.Sequence;
 import com.example.awesometimer.R;
 import com.example.awesometimer.ViewModels.SequenceViewModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
     public static String SEQUENCE_ID = "com.example.android.awesomeTimer.SEQUENCE_ID";
@@ -41,7 +44,13 @@ public class MainActivity extends AppCompatActivity {
         adapter.setOnItemClickListener(new SequenceAdapter.ClickListener() {
             @Override
             public void onItemClick(int position, View v) {
-                // start timer here
+                int id = adapter.getItem(position).id;
+                    mSeqViewModel.getItems(id).observe(MainActivity.this, items -> {
+                    ArrayList<Item> listToParse = new ArrayList<>(items);
+                    Intent intent = new Intent(MainActivity.this, TimerActivity.class);
+                    intent.putParcelableArrayListExtra(SEQUENCE_ID, listToParse);
+                    startActivity(intent);
+                });
             }
 
             @Override

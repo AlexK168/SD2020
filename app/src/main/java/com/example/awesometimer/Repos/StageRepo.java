@@ -24,7 +24,6 @@ public class StageRepo {
     public LiveData<List<Stage>> getAllStages() { return mAllStages; }
 
     public void insert(Stage seq) { new StageRepo.insertStageAsyncTask(mStageDao).execute(seq);}
-    public void update(Stage seq) { new StageRepo.updateStageAsyncTask(mStageDao).execute(seq);}
     public void delete(Stage seq) { new StageRepo.deleteStageAsyncTask(mStageDao).execute(seq);}
 
     private static class insertStageAsyncTask extends AsyncTask<Stage, Void, Void> {

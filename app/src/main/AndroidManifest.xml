@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.awesometimer">
 
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -9,14 +11,30 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AwesomeTimer">
-        <activity android:name=".Activities.EditItem"></activity>
-        <activity android:name=".Activities.Stages" />
+        <activity
+            android:name=".Activities.TimerActivity"
+            android:parentActivityName=".Activities.MainActivity"
+        />
+        <service android:name=".TimerService" />
+        <activity
+            android:name=".Activities.EditItem"
+            android:parentActivityName=".Activities.EditSequence"/>
+        <activity
+            android:name=".Activities.Stages"
+            android:parentActivityName=".Activities.EditSequence"
+        />
         <activity
             android:name=".Activities.EditSequence"
             android:label="@string/title_activity_edit_sequence"
-            android:theme="@style/Theme.AwesomeTimer.NoActionBar" />
-        <activity android:name=".Activities.AddStage" />
-        <activity android:name=".Activities.AddSequence" />
+            android:theme="@style/Theme.AwesomeTimer.NoActionBar"
+            android:parentActivityName=".Activities.MainActivity"
+        />
+        <activity android:name=".Activities.AddStage"
+            android:parentActivityName=".Activities.Stages"/>
+        <activity
+            android:name=".Activities.AddSequence"
+            android:parentActivityName=".Activities.MainActivity"
+        />
         <activity android:name=".Activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

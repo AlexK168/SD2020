@@ -5,22 +5,30 @@ import android.os.AsyncTask;
 
 import androidx.lifecycle.LiveData;
 import com.example.awesometimer.Data.AppDatabase;
+import com.example.awesometimer.Data.ItemDao;
 import com.example.awesometimer.Data.SequenceDao;
+import com.example.awesometimer.Models.Item;
 import com.example.awesometimer.Models.Sequence;
 import java.util.List;
 
 public class SequenceRepo {
 
     private SequenceDao mSequenceDao;
+    private ItemDao mItemDao;
     private LiveData<List<Sequence>> mAllSequences;
 
     public SequenceRepo(Application application) {
         AppDatabase db = AppDatabase.getDatabase(application);
         mSequenceDao = db.SequenceDao();
+        mItemDao = db.ItemDao();
         mAllSequences = mSequenceDao.getAllSequences();
     }
 
     public LiveData<List<Sequence>> getAllSequences() { return mAllSequences; }
+
+    public LiveData<List<Item>> getItems(int id) {
+        return mItemDao.getItems(id);
+    }
 
     public void insert(Sequence seq) { new SequenceRepo.insertSequenceAsyncTask(mSequenceDao).execute(seq);}
     public void update(Sequence seq) { new SequenceRepo.updateSequenceAsyncTask(mSequenceDao).execute(seq);}
