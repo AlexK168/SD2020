@@ -25,5 +25,4 @@ public interface ItemDao {
     @Query("SELECT * from Item where id_sequence = :id") // get all items of sequence
     LiveData<List<Item>> getItems(int id);
 
-
 }

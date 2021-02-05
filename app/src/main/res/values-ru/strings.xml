@@ -1,0 +1,33 @@
+<resources>
+    <string name="app_name">Крутой таймер</string>
+    <string name="hint_word">Тайтл</string>
+    <string name="phase_hint_word">Введите фазу</string>
+    <string name="button_save">Сохранить</string>
+    <string name="empty_not_saved">Пусто</string>
+    <string name="no_phases_yet">Нет фаз</string>
+    <string name="delete">удалить</string>
+    <string name="enter_time">Введите время</string>
+    <string name="todo">TODO</string>
+    <string name="pick_color_cap">Выберите цвет</string>
+    <string name="timer_time">30</string>
+    <string name="button_edit">Редачить</string>
+    <string name="edit">Редачить</string>
+    <string name="title_activity_edit_sequence">Редачить последовательность</string>
+    <string name="next">Вперед</string>
+    <string name="previous">Назад</string>
+    <string name="options">Настройки</string>
+    <string name="no_stages">Пока нет стадий</string>
+    <string name="no_sequences">Пока нет последовательностей</string>
+    <string name="hours">Часы</string>
+    <string name="mins">Минуты</string>
+    <string name="secs">Секунды</string>
+    <string name="zero">0</string>
+    <string name="none">нет</string>
+    <string name="stop_button">стоп</string>
+    <string name="title_activity_my_settings">Настройки</string>
+    <string name="choose_lang">Выберите зык</string>
+    <string name="theme">Тема</string>
+    <string name="font">Шрифт</string>
+    <string name="locale">Язык</string>
+    <string name="delete_all">Удалить все</string>
+</resources>

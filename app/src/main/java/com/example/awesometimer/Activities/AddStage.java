@@ -19,6 +19,7 @@ public class AddStage extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        MySettingsActivity.SetConfigurations(this);
         setContentView(R.layout.activity_add_phase);
 
         mEditWordView = findViewById(R.id.edit_word);

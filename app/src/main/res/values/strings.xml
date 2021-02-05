@@ -13,14 +13,10 @@
     <string name="button_edit">edit</string>
     <string name="edit">edit</string>
     <string name="title_activity_edit_sequence">EditSequence</string>
-    <!-- Strings used for fragments for navigation -->
-    <string name="first_fragment_label">First Fragment</string>
-    <string name="second_fragment_label">Second Fragment</string>
     <string name="next">Next</string>
     <string name="previous">Previous</string>
+    <string name="options">options</string>
 
-    <string name="hello_first_fragment">Hello first fragment</string>
-    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="no_stages">No Stages yet</string>
     <string name="no_sequences">No Sequences yet</string>
     <string name="hours">hours</string>
@@ -29,5 +25,12 @@
     <string name="zero">0</string>
     <string name="none">none</string>
     <string name="stop_button">stop</string>
+    <string name="title_activity_my_settings">MySettingsActivity</string>
+    <string name="choose_lang">Choose language</string>
+    <string name="theme">Theme</string>
+    <string name="font">Font</string>
+    <string name="locale">Locale</string>
+    <string name="delete_all">Delete all</string>
+
 
 </resources>

@@ -23,6 +23,7 @@ public class Stages extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        MySettingsActivity.SetConfigurations(this);
         setContentView(R.layout.activity_main);
         mStageViewModel = ViewModelProviders.of(this).get(StageViewModel.class);
         RecyclerView recyclerView = findViewById(R.id.recyclerview);

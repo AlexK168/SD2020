@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.awesometimer.Adapters.SequenceAdapter;
@@ -31,14 +32,17 @@ public class MainActivity extends AppCompatActivity {
 
     private SequenceViewModel mSeqViewModel;
     private FloatingActionButton addSeq;
+    private Button optionsButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setTheme(R.style.Theme_AwesomeTimer);
         super.onCreate(savedInstanceState);
+        MySettingsActivity.SetConfigurations(this);
         setContentView(R.layout.activity_main);
         mSeqViewModel = ViewModelProviders.of(this).get(SequenceViewModel.class);
         addSeq = findViewById(R.id.fab);
+        optionsButton = findViewById(R.id.options_button);
         RecyclerView recyclerView = findViewById(R.id.recyclerview);
 
         final SequenceAdapter adapter = new SequenceAdapter(this);
@@ -63,6 +67,10 @@ public class MainActivity extends AppCompatActivity {
                 intent.putExtra(SEQUENCE_COLOR, s.color);
                 startActivityForResult(intent, EDIT_SEQUENCE_ACTIVITY_REQUEST_CODE);
             }
+        });
+
+        optionsButton.setOnClickListener(v -> {
+            startActivity(new Intent(this, MySettingsActivity.class));
         });
 
         recyclerView.setAdapter(adapter);

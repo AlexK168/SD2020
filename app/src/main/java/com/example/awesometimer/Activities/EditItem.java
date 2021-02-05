@@ -23,6 +23,7 @@ public class EditItem extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        MySettingsActivity.SetConfigurations(this);
         setContentView(R.layout.activity_edit_item);
         editItem = findViewById(R.id.edit_item_name);
         editHours = findViewById(R.id.editTextHours);

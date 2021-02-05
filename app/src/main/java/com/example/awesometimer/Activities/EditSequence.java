@@ -41,6 +41,7 @@ public class EditSequence extends AppCompatActivity implements ColorPickerDialog
     protected void onCreate(Bundle savedInstanceState) {
         Intent intent = getIntent();
         super.onCreate(savedInstanceState);
+        MySettingsActivity.SetConfigurations(this);
         setContentView(R.layout.activity_add_sequence);
         fab = findViewById(R.id.fab);
         button = findViewById(R.id.button_save);

@@ -29,6 +29,7 @@ public class AddSequence extends AppCompatActivity implements ColorPickerDialogL
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        MySettingsActivity.SetConfigurations(this);
         setContentView(R.layout.activity_add_sequence);
 
         mAddSequenceViewModel = ViewModelProviders.of(this).get(AddSequenceViewModel.class);
