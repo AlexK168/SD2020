@@ -8,20 +8,25 @@
 
     <TextView
         android:id="@+id/textView"
+        style="@style/text_view_style"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        style="@style/text_view_style"
+        android:layout_weight="3"
         tools:text="placeholder text" />
 
-    <EditText
-        android:id="@+id/editTextTime"
+    <TextView
+        android:id="@+id/timeTextView"
+        style="@style/text_view_style"
         android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="3"
+        tools:text="placeholder text" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="42dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:autofillHints=""
-        android:ems="10"
-        android:hint="@string/enter_time"
-        android:inputType="time" />
+        android:text="@string/button_edit" />
 
 </LinearLayout>

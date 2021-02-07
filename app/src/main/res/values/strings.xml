@@ -5,10 +5,32 @@
     <string name="button_save">Save</string>
     <string name="empty_not_saved">Empty</string>
     <string name="no_phases_yet">No Phases yet</string>
-    <string name="edit">edit</string>
     <string name="delete">delete</string>
     <string name="enter_time">enter time</string>
     <string name="todo">TODO</string>
     <string name="pick_color_cap">choose color</string>
-    <string name="todo">TODO</string>
+    <string name="timer_time">30</string>
+    <string name="button_edit">edit</string>
+    <string name="edit">edit</string>
+    <string name="title_activity_edit_sequence">EditSequence</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+    <string name="options">options</string>
+
+    <string name="no_stages">No Stages yet</string>
+    <string name="no_sequences">No Sequences yet</string>
+    <string name="hours">hours</string>
+    <string name="mins">minutes</string>
+    <string name="secs">seconds</string>
+    <string name="zero">0</string>
+    <string name="none">none</string>
+    <string name="stop_button">stop</string>
+    <string name="title_activity_my_settings">MySettingsActivity</string>
+    <string name="choose_lang">Choose language</string>
+    <string name="theme">Theme</string>
+    <string name="font">Font</string>
+    <string name="locale">Locale</string>
+    <string name="delete_all">Delete all</string>
+
+
 </resources>

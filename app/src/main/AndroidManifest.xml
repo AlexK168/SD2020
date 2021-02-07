@@ -2,17 +2,49 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.awesometimer">
 
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+
+    <uses-feature android:name="android.hardware.type.watch" />
+
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.AwesomeTimer">
-        <activity android:name=".PhasesActivity"></activity>
-        <activity android:name=".AddPhase" />
-        <activity android:name=".AddSequence" />
-        <activity android:name=".MainActivity">
+        android:theme="@style/SplashScreenTheme">
+        <activity android:name=".Activities.MySettingsActivity" />
+        <activity
+            android:name=".Activities.TimerActivity"
+            android:parentActivityName=".Activities.MainActivity"
+            android:theme="@style/Theme.AwesomeTimer" />
+
+        <service android:name=".TimerService" />
+
+        <activity
+            android:name=".Activities.EditItem"
+            android:parentActivityName=".Activities.EditSequence"
+            android:theme="@style/Theme.AwesomeTimer" />
+        <activity
+            android:name=".Activities.Stages"
+            android:parentActivityName=".Activities.EditSequence"
+            android:theme="@style/Theme.AwesomeTimer" />
+        <activity
+            android:name=".Activities.EditSequence"
+            android:label="@string/title_activity_edit_sequence"
+            android:parentActivityName=".Activities.MainActivity"
+            android:theme="@style/Theme.AwesomeTimer" />
+        <activity
+            android:name=".Activities.AddStage"
+            android:parentActivityName=".Activities.Stages"
+            android:theme="@style/Theme.AwesomeTimer" />
+        <activity
+            android:name=".Activities.AddSequence"
+            android:parentActivityName=".Activities.MainActivity"
+            android:theme="@style/Theme.AwesomeTimer" />
+        <activity android:name=".Activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

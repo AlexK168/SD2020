@@ -5,29 +5,30 @@ import android.app.Application;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
-import com.example.awesometimer.Data.Repository;
+import com.example.awesometimer.Models.Item;
 import com.example.awesometimer.Models.Sequence;
-import com.example.awesometimer.Models.SequenceWithItems;
+import com.example.awesometimer.Repos.ItemRepo;
+import com.example.awesometimer.Repos.SequenceRepo;
 
 import java.util.List;
 
 public class SequenceViewModel extends AndroidViewModel {
 
-    private Repository mRepository;
+    private SequenceRepo mRepository;
 
     private LiveData<List<Sequence>> mAllSequences;
-    private LiveData<List<SequenceWithItems>> mSequencesWithItems;
 
     public SequenceViewModel (Application application) {
         super(application);
-        mRepository = new Repository(application);
+        mRepository = new SequenceRepo(application);
         mAllSequences = mRepository.getAllSequences();
-        mSequencesWithItems = mRepository.getSequencesWithItems();
     }
 
     public LiveData<List<Sequence>> getAllSequences() { return mAllSequences; }
-    public LiveData<List<SequenceWithItems>> getSequencesWithItems() { return mSequencesWithItems; }
 
+    public LiveData<List<Item>> getItems(int id) {
+        return mRepository.getItems(id);
+    }
     public void insert(Sequence seq) { mRepository.insert(seq); }
     public void delete(Sequence seq) { mRepository.delete(seq); }
 }

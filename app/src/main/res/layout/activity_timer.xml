@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activities.TimerActivity">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerview"
+        android:layout_width="349dp"
+        android:layout_height="389dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/itemTextView"
+        android:layout_width="204dp"
+        android:layout_height="46dp"
+        android:gravity="center"
+        android:text="@string/none"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/prevButton"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/recyclerview" />
+
+    <TextView
+        android:id="@+id/timeRemainTextView"
+        android:layout_width="204dp"
+        android:layout_height="46dp"
+        android:gravity="center"
+        android:text="@string/none"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/nextButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/recyclerview" />
+
+    <ImageButton
+        android:id="@+id/pauseButton"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:background="#3F51B5"
+        android:foregroundGravity="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/recyclerview"
+        app:srcCompat="@android:drawable/ic_media_pause"
+        android:contentDescription="@string/todo" />
+
+    <ImageButton
+        android:id="@+id/nextButton"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:background="#3F51B5"
+        android:contentDescription="@string/next"
+        android:foregroundGravity="center"
+        app:layout_constraintBottom_toBottomOf="@+id/pauseButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/pauseButton"
+        app:layout_constraintTop_toTopOf="@+id/pauseButton"
+        app:srcCompat="@android:drawable/ic_media_ff" />
+
+    <ImageButton
+        android:id="@+id/prevButton"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:background="#3F51B5"
+        android:contentDescription="@string/previous"
+        android:foregroundGravity="center"
+        app:layout_constraintBottom_toBottomOf="@+id/pauseButton"
+        app:layout_constraintEnd_toStartOf="@+id/pauseButton"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/pauseButton"
+        app:srcCompat="@android:drawable/ic_media_rew" />
+
+    <ImageButton
+        android:id="@+id/stopButton"
+        android:layout_width="288dp"
+        android:layout_height="54dp"
+        android:contentDescription="@string/stop_button"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/pauseButton"
+        app:srcCompat="@android:drawable/ic_delete" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

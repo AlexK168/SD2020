@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="languages">
+        <item>Ру</item>
+        <item>Англ</item>
+    </string-array>
+
+    <string-array name="font_items">
+        <item>мелкий</item>
+        <item>средний</item>
+        <item>крупный</item>
+    </string-array>
+</resources>
