@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ProfileActivity">
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="240dp"
+        android:layout_height="246dp"
+        app:layout_constraintBottom_toTopOf="@+id/gamesWonValueTextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/editNickname"
+        android:layout_width="186dp"
+        android:layout_height="43dp"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:hint="@string/nicknameHint"
+        android:text=""
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="@+id/imageView"
+        app:layout_constraintStart_toStartOf="@+id/imageView"
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+
+    <ImageButton
+        android:id="@+id/pickImageButton"
+        android:layout_width="195dp"
+        android:layout_height="42dp"
+        android:layout_marginBottom="10dp"
+        app:layout_constraintBottom_toTopOf="@+id/imageView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@android:drawable/ic_menu_gallery" />
+
+    <Button
+        android:id="@+id/saveButton"
+        android:layout_width="138dp"
+        android:layout_height="57dp"
+        android:layout_marginBottom="20dp"
+        android:text="@string/save"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/gamesPlayedTextView"
+        android:layout_width="168dp"
+        android:layout_height="43dp"
+        android:layout_marginTop="30dp"
+        android:gravity="center|start"
+        android:text="@string/gamesPlayed"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/gamesWonTextView"
+        app:layout_constraintEnd_toStartOf="@+id/gamesPlayedValueTextView"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editNickname" />
+
+    <TextView
+        android:id="@+id/gamesWonTextView"
+        android:layout_width="168dp"
+        android:layout_height="43dp"
+        android:gravity="center|start"
+        android:text="@string/gamesWon"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/winRateTextView"
+        app:layout_constraintEnd_toStartOf="@+id/gamesWonValueTextView"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/gamesPlayedTextView" />
+
+    <TextView
+        android:id="@+id/winRateTextView"
+        android:layout_width="168dp"
+        android:layout_height="43dp"
+        android:gravity="center|start"
+        android:text="@string/winRate"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/saveButton"
+        app:layout_constraintEnd_toStartOf="@+id/winRateValueTextView"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/gamesWonTextView" />
+
+    <TextView
+        android:id="@+id/gamesPlayedValueTextView"
+        android:layout_width="168dp"
+        android:layout_height="43dp"
+        android:gravity="center"
+        android:textSize="24sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/gamesPlayedTextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/gamesPlayedTextView" />
+
+    <TextView
+        android:id="@+id/gamesWonValueTextView"
+        android:layout_width="168dp"
+        android:layout_height="43dp"
+        android:gravity="center"
+        android:textSize="24sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/gamesWonTextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/gamesWonTextView" />
+
+    <TextView
+        android:id="@+id/winRateValueTextView"
+        android:layout_width="168dp"
+        android:layout_height="43dp"
+        android:gravity="center"
+        android:textSize="24sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/winRateTextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/winRateTextView" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
