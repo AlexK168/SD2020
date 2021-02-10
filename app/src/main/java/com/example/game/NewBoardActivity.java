@@ -19,7 +19,7 @@ import android.widget.Toast;
 import com.example.game.Adapters.ShipAdapter;
 import com.example.game.Models.Board;
 import com.example.game.Models.Ship;
-import com.example.game.ViewModels.NewGameViewModel;
+import com.example.game.ViewModels.NewBoardViewModel;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -27,8 +27,7 @@ import com.google.firebase.database.FirebaseDatabase;
 public class NewBoardActivity extends AppCompatActivity {
 
     private GridLayout mBoard;
-    private NewGameViewModel mNewGameViewModel;
-    private final Integer[] pictures = {R.mipmap.empty, R.mipmap.ship, R.mipmap.hit, R.mipmap.miss, R.mipmap.empty};
+    private NewBoardViewModel mNewGameViewModel;
     private ImageView[] cells;
     private EditText xEditText;
     private EditText yEditText;
@@ -47,7 +46,7 @@ public class NewBoardActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_new_game);
+        setContentView(R.layout.activity_new_board);
 
         mDatabase = FirebaseDatabase.getInstance().getReference("boards");
         mAuth = FirebaseAuth.getInstance();
@@ -64,9 +63,7 @@ public class NewBoardActivity extends AppCompatActivity {
         down = findViewById(R.id.downImageButton);
         rotate = findViewById(R.id.rotateImageButton);
 
-
-
-        mNewGameViewModel = ViewModelProviders.of(this).get(NewGameViewModel.class);
+        mNewGameViewModel = ViewModelProviders.of(this).get(NewBoardViewModel.class);
 
         RecyclerView recyclerView = findViewById(R.id.recyclerView);
         final ShipAdapter adapter = new ShipAdapter(this);
@@ -87,7 +84,6 @@ public class NewBoardActivity extends AppCompatActivity {
         mNewGameViewModel.mShips.observe(this, adapter::setItems);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-
 
         cells = new ImageView[100];
         DisplayMetrics displayMetrics = new DisplayMetrics();
@@ -143,6 +139,7 @@ public class NewBoardActivity extends AppCompatActivity {
         saveButton.setOnClickListener(v -> {
             if (saveBoard()) {
                 Toast.makeText(NewBoardActivity.this, "Board is saved", Toast.LENGTH_SHORT).show();
+                finish();
             }
         });
     }

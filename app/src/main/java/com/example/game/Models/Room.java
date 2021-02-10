@@ -1,10 +1,11 @@
 package com.example.game.Models;
 
 public class Room {
-    public Room(String id) {
-        this.id = id;
+    public Room(String hostUId) {
+        this.hostUId = hostUId;
+        this.guestUId = null;
     }
-    public String id;
+    public Room(){}
     public String hostUId;
     public String guestUId;
 }
