@@ -12,4 +12,10 @@
     <string name="failedLoginMsg">Failed to log in. Check internet connection, I dunno</string>
     <string name="imageNotChosen">Image is not chosen</string>
     <string name="emptyNickname">Empty Nickname</string>
+    <string name="place">Place</string>
+    <string name="x">x</string>
+    <string name="y">y</string>
+    <string name="size">Size</string>
+    <string name="orientation">Orientation</string>
+    <string name="delete">Delete</string>
 </resources>

@@ -52,6 +52,13 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(MainActivity.this, ProfileActivity.class);
             startActivity(intent);
         });
+
+        mNewGameButton.setOnClickListener(v -> {
+            // start new game here
+
+            // board activity
+            // startActivity(new Intent(MainActivity.this, NewBoardActivity.class));
+        });
     }
 
     @Override

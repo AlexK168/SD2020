@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="top"
+    tools:context=".NewBoardActivity"
+    android:orientation="vertical"
+    android:gravity="center_horizontal">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/sizeEditText"
+            android:layout_width="30dp"
+            android:layout_height="40dp"
+            android:layout_weight="3"
+            android:gravity="center"
+            android:inputType="number"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="@+id/sizeTextView"
+            app:layout_constraintStart_toEndOf="@+id/sizeTextView" />
+
+        <TextView
+            android:id="@+id/yTextView"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:gravity="center"
+            android:text="@string/y"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/xTextView" />
+
+        <TextView
+            android:id="@+id/xTextView"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="8dp"
+            android:layout_weight="3"
+            android:gravity="center"
+            android:text="@string/x"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toTopOf="@+id/yTextView"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/yEditText"
+            android:layout_width="30dp"
+            android:layout_height="40dp"
+            android:layout_weight="3"
+            android:gravity="center"
+            android:inputType="number"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="@+id/yTextView"
+            app:layout_constraintStart_toEndOf="@+id/yTextView" />
+
+        <EditText
+            android:id="@+id/xEditText"
+            android:layout_width="30dp"
+            android:layout_height="40dp"
+            android:layout_weight="3"
+            android:gravity="center"
+            android:inputType="number"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="@+id/xTextView"
+            app:layout_constraintStart_toEndOf="@+id/xTextView" />
+
+        <Button
+            android:id="@+id/placeButton"
+            android:layout_width="98dp"
+            android:layout_height="53dp"
+            android:layout_weight="1"
+            android:text="@string/place"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/switch1"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/sizeTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="16dp"
+            android:text="@string/size"
+            android:textSize="18sp"
+            app:layout_constraintStart_toEndOf="@+id/xEditText"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/orientationTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginLeft="10dp"
+            android:text="@string/orientation"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="@+id/yEditText"
+            app:layout_constraintStart_toEndOf="@+id/yEditText"
+            app:layout_constraintTop_toTopOf="@+id/yEditText" />
+
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/switch1"
+            android:layout_width="56dp"
+            android:layout_height="27dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            app:layout_constraintBottom_toBottomOf="@+id/orientationTextView"
+            app:layout_constraintStart_toEndOf="@+id/orientationTextView"
+            app:layout_constraintTop_toTopOf="@+id/orientationTextView" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <GridLayout
+            android:id="@+id/board"
+            android:layout_width="277dp"
+            android:layout_height="match_parent"
+            android:orientation="horizontal" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <ImageButton
+                android:id="@+id/rotateImageButton"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@mipmap/rotate" />
+
+            <ImageButton
+                android:id="@+id/left"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                app:layout_constraintBottom_toBottomOf="@+id/rotateImageButton"
+                app:layout_constraintEnd_toStartOf="@+id/rotateImageButton"
+                app:layout_constraintTop_toTopOf="@+id/rotateImageButton"
+                app:srcCompat="@mipmap/left" />
+
+            <ImageButton
+                android:id="@+id/right"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                app:layout_constraintBottom_toBottomOf="@+id/rotateImageButton"
+                app:layout_constraintStart_toEndOf="@+id/rotateImageButton"
+                app:layout_constraintTop_toTopOf="@+id/rotateImageButton"
+                app:srcCompat="@mipmap/right" />
+
+            <ImageButton
+                android:id="@+id/upImageButton"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                app:layout_constraintBottom_toTopOf="@+id/rotateImageButton"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:srcCompat="@mipmap/up" />
+
+            <ImageButton
+                android:id="@+id/downImageButton"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/rotateImageButton"
+                app:srcCompat="@mipmap/down" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/save_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/save" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+    </androidx.recyclerview.widget.RecyclerView>
+
+</LinearLayout>
