@@ -1,6 +1,7 @@
 package com.example.game;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
@@ -33,6 +34,9 @@ public class JoinGameActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private Button toBattleButton;
     private JoinGameViewModel mJoinGameViewModel;
+    public static final String ROOM_ID_EXTRA = "room_id_extra";
+    private static final int BOARD_REQUEST_CODE = 1;
+    private String Uid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,18 +50,31 @@ public class JoinGameActivity extends AppCompatActivity {
         idEditText= findViewById(R.id.gameIdValueTextView);
         createBoard = findViewById(R.id.createBoardButton);
         toBattleButton = findViewById(R.id.toBattleButton);
+        toBattleButton.setEnabled(false);
 
-        toBattleButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mDatabase.child(idEditText.getText().toString()).addValueEventListener(new ValueEventListener() {
+        Uid = mAuth.getUid();
+        toBattleButton.setOnClickListener(v -> {
+            String roomId = idEditText.getText().toString();
+            DatabaseReference assumedRoom = mDatabase.child(roomId);
+            mJoinGameViewModel.setRoomId(roomId);
+            mJoinGameViewModel.setAssumedRoom(assumedRoom);
+        });
+
+        mJoinGameViewModel.getAssumedRoom().observe(this, databaseReference -> {
+            if (databaseReference != null) {
+                databaseReference.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         Room room = snapshot.getValue(Room.class);
                         if (room != null) {
-                            room.guestUId = mAuth.getUid();
-                            mDatabase.child(idEditText.getText().toString()).setValue(room);
-                            mJoinGameViewModel.isConnected.setValue(true);
+                            room.guestReady = true;
+                            room.guestUId = Uid;
+                            String roomId = snapshot.getKey();
+                            mDatabase.child(roomId).setValue(room);
+                            setListenerForHostCommand(databaseReference);
+                            toBattleButton.setEnabled(false);
+                        } else {
+                            Toast.makeText(JoinGameActivity.this, "Type a valid game id", Toast.LENGTH_SHORT).show();
                         }
                     }
 
@@ -66,36 +83,42 @@ public class JoinGameActivity extends AppCompatActivity {
 
                     }
                 });
-
-
+            } else {
+                Toast.makeText(JoinGameActivity.this, "Type a valid game id", Toast.LENGTH_SHORT).show();
             }
         });
 
-        mJoinGameViewModel.isConnected.observe(this, new Observer<Boolean>() {
+        mJoinGameViewModel.getBoardCreated().observe(this, aBoolean -> {
+            toBattleButton.setEnabled(aBoolean);
+            createBoard.setEnabled(!aBoolean);
+        });
+        createBoard.setOnClickListener(v -> startActivityForResult(new Intent(JoinGameActivity.this, NewBoardActivity.class), BOARD_REQUEST_CODE));
+    }
+
+    private void setListenerForHostCommand(DatabaseReference ref) {
+        ref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            public void onChanged(Boolean aBoolean) {
-                if (aBoolean) {
-                    mDatabase.child(idEditText.getText().toString()).addValueEventListener(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            Room r = snapshot.getValue(Room.class);
-                            if (r != null) {
-                                if (r.isReady) {
-                                    Toast.makeText(JoinGameActivity.this, "Joining to game", Toast.LENGTH_SHORT).show();
-                                    startActivity(new Intent(JoinGameActivity.this, GameActivity.class));
-                                }
-                            }
-                        }
-
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError error) {
-
-                        }
-                    });
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                Room room = snapshot.getValue(Room.class);
+                if (room.isReady) {
+                    Intent intent = new Intent(JoinGameActivity.this, GameActivity.class);
+                    startActivity(intent);
                 }
             }
-        });
 
-        createBoard.setOnClickListener(v -> startActivity(new Intent(JoinGameActivity.this, NewBoardActivity.class)));
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (resultCode == RESULT_OK && requestCode == BOARD_REQUEST_CODE) {
+            mJoinGameViewModel.setBoardCreated(true);
+        }
     }
 }

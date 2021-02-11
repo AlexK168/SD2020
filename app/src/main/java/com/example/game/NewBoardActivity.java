@@ -139,6 +139,7 @@ public class NewBoardActivity extends AppCompatActivity {
         saveButton.setOnClickListener(v -> {
             if (saveBoard()) {
                 Toast.makeText(NewBoardActivity.this, "Board is saved", Toast.LENGTH_SHORT).show();
+                setResult(RESULT_OK);
                 finish();
             }
         });

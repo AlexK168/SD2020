@@ -1,6 +1,7 @@
 package com.example.game;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
@@ -22,6 +23,7 @@ import com.example.game.Models.Room;
 import com.example.game.Models.User;
 import com.example.game.ViewModels.NewGameViewModel;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -40,6 +42,18 @@ public class NewGameActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private Button toBattleButton;
     private NewGameViewModel mGameViewModel;
+    public static final String ROOM_ID_EXTRA = "room_id_extra";
+    private static final int BOARD_REQUEST_CODE = 1;
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (resultCode == RESULT_OK && requestCode == BOARD_REQUEST_CODE) {
+            mGameViewModel.setBoardCreated(true);
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,16 +83,44 @@ public class NewGameActivity extends AppCompatActivity {
             clipboard.setPrimaryClip(clip);
         });
 
-        createBoard.setOnClickListener(v -> startActivity(new Intent(NewGameActivity.this, NewBoardActivity.class)));
+        mGameViewModel.getBoardCreated().observe(this, aBoolean -> {
+            toBattleButton.setEnabled(aBoolean && mGameViewModel.getOpponentConnected().getValue());
+            createBoard.setEnabled(!aBoolean);
+        });
 
-        mDatabase.child(uniqueID).addValueEventListener(new ValueEventListener() {
+        mGameViewModel.getOpponentConnected().observe(this, aBoolean -> toBattleButton.setEnabled(aBoolean && mGameViewModel.getBoardCreated().getValue()));
+
+        createBoard.setOnClickListener(v -> startActivityForResult(new Intent(NewGameActivity.this, NewBoardActivity.class), BOARD_REQUEST_CODE));
+
+        mDatabase.child(uniqueID).addChildEventListener(new ChildEventListener() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                Room room = snapshot.getValue(Room.class);
-                if (room != null && room.guestUId != null) {
-                    mGameViewModel.opponentId = room.guestUId;
-                    mGameViewModel.opponentConnected.setValue(true);
+            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                if (snapshot.getKey().equals("guestReady")){
+                    if (snapshot.getValue(Boolean.class)){
+                        Toast.makeText(NewGameActivity.this, "Opponent connected", Toast.LENGTH_SHORT).show();
+                        mGameViewModel.setOpponentConnected(true);
+                    }
                 }
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                if (snapshot.getKey().equals("guestReady")){
+                    if (snapshot.getValue(Boolean.class)){
+                        Toast.makeText(NewGameActivity.this, "Opponent connected", Toast.LENGTH_SHORT).show();
+                        mGameViewModel.setOpponentConnected(true);
+                    }
+                }
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
             }
 
             @Override
@@ -87,46 +129,14 @@ public class NewGameActivity extends AppCompatActivity {
             }
         });
 
-        mGameViewModel.opponentConnected.observe(this, aBoolean -> {
-            if (aBoolean) {
-                mBoardDatabase.child(mGameViewModel.opponentId).addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        Board opponentBoard = snapshot.getValue(Board.class);
-                        if (opponentBoard != null) {
-                            mGameViewModel.opponentBoardExists = true;
-                        }
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-
-                    }
-                });
-            }
-        });
-
-        mBoardDatabase.child(mAuth.getUid()).addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                Board board = snapshot.getValue(Board.class);
-                if (board != null) {
-                    mGameViewModel.selfBoardExists = true;
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
+        mGameViewModel.getOpponentConnected().observe(this, aBoolean -> toBattleButton.setEnabled(aBoolean && mGameViewModel.getBoardCreated().getValue()));
 
         toBattleButton.setOnClickListener(v -> {
-            Toast.makeText(NewGameActivity.this, (mGameViewModel.ready() ? "Starting the game" : "Not ready yet"), Toast.LENGTH_SHORT).show();
-            if (mGameViewModel.ready()) {
-                mDatabase.child(uniqueID).child("isReady").setValue(true);
-                startActivity(new Intent(NewGameActivity.this, GameActivity.class));
-            }
+            Toast.makeText(NewGameActivity.this, "Starting the game", Toast.LENGTH_SHORT).show();
+            mDatabase.child(uniqueID).child("isReady").setValue(true);
+            Intent intent = new Intent(NewGameActivity.this, GameActivity.class);
+            intent.putExtra(ROOM_ID_EXTRA, uniqueID);
+            startActivity(intent);
         });
     }
 
