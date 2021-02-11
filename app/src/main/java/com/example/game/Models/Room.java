@@ -8,4 +8,5 @@ public class Room {
     public Room(){}
     public String hostUId;
     public String guestUId;
+    public boolean isReady;
 }

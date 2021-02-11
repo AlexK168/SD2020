@@ -53,12 +53,8 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
-        mNewGameButton.setOnClickListener(v -> {
-            // start new game here
-            startActivity(new Intent(MainActivity.this, NewGameActivity.class));
-            // board activity
-            // startActivity(new Intent(MainActivity.this, NewBoardActivity.class));
-        });
+        mNewGameButton.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, NewGameActivity.class)));
+        mJoinGameButton.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, JoinGameActivity.class)));
     }
 
     @Override

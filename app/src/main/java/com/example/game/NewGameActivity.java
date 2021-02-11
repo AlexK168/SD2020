@@ -106,7 +106,7 @@ public class NewGameActivity extends AppCompatActivity {
             }
         });
 
-        mBoardDatabase.child(uniqueID).addValueEventListener(new ValueEventListener() {
+        mBoardDatabase.child(mAuth.getUid()).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 Board board = snapshot.getValue(Board.class);
@@ -124,7 +124,8 @@ public class NewGameActivity extends AppCompatActivity {
         toBattleButton.setOnClickListener(v -> {
             Toast.makeText(NewGameActivity.this, (mGameViewModel.ready() ? "Starting the game" : "Not ready yet"), Toast.LENGTH_SHORT).show();
             if (mGameViewModel.ready()) {
-                // start game activity
+                mDatabase.child(uniqueID).child("isReady").setValue(true);
+                startActivity(new Intent(NewGameActivity.this, GameActivity.class));
             }
         });
     }
