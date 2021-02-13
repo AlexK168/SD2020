@@ -36,6 +36,7 @@ public class JoinGameActivity extends AppCompatActivity {
     private JoinGameViewModel mJoinGameViewModel;
     public static final String ROOM_ID_EXTRA = "room_id_extra";
     private static final int BOARD_REQUEST_CODE = 1;
+    private static final int GAME_REQUEST_CODE = 2;
     private String Uid;
 
     @Override
@@ -102,7 +103,8 @@ public class JoinGameActivity extends AppCompatActivity {
                 Room room = snapshot.getValue(Room.class);
                 if (room.isReady) {
                     Intent intent = new Intent(JoinGameActivity.this, GameActivity.class);
-                    startActivity(intent);
+                    intent.putExtra(JoinGameActivity.ROOM_ID_EXTRA, snapshot.getKey());
+                    startActivityForResult(intent, GAME_REQUEST_CODE);
                 }
             }
 
@@ -119,6 +121,9 @@ public class JoinGameActivity extends AppCompatActivity {
 
         if (resultCode == RESULT_OK && requestCode == BOARD_REQUEST_CODE) {
             mJoinGameViewModel.setBoardCreated(true);
+        }
+        if (resultCode == RESULT_OK && requestCode == GAME_REQUEST_CODE) {
+            finish();
         }
     }
 }

@@ -39,12 +39,14 @@ public class NewGameActivity extends AppCompatActivity {
     private ImageButton copyButton;
     private DatabaseReference mDatabase;
     private DatabaseReference mBoardDatabase;
+    private DatabaseReference mGameDatabase;
     private FirebaseAuth mAuth;
     private Button toBattleButton;
     private NewGameViewModel mGameViewModel;
     public static final String ROOM_ID_EXTRA = "room_id_extra";
     private static final int BOARD_REQUEST_CODE = 1;
-
+    private static final int GAME_REQUEST_CODE = 2;
+    String uniqueID;
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
@@ -52,6 +54,12 @@ public class NewGameActivity extends AppCompatActivity {
 
         if (resultCode == RESULT_OK && requestCode == BOARD_REQUEST_CODE) {
             mGameViewModel.setBoardCreated(true);
+        }
+
+        if (resultCode == RESULT_OK && requestCode == GAME_REQUEST_CODE) {
+            mDatabase.child(uniqueID).removeValue();
+            mGameDatabase.child(uniqueID).removeValue();
+            finish();
         }
     }
 
@@ -64,13 +72,14 @@ public class NewGameActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         mDatabase = FirebaseDatabase.getInstance().getReference("rooms");
         mBoardDatabase = FirebaseDatabase.getInstance().getReference("boards");
+        mGameDatabase = FirebaseDatabase.getInstance().getReference("games");
 
         copyButton = findViewById(R.id.copyButton);
         idTextView = findViewById(R.id.gameIdValueTextView);
         createBoard = findViewById(R.id.createBoardButton);
         toBattleButton = findViewById(R.id.toBattleButton);
 
-        String uniqueID = UUID.randomUUID().toString();
+        uniqueID = UUID.randomUUID().toString();
         idTextView.setText(uniqueID);
         Room room = new Room(mAuth.getUid());
         mDatabase.child(uniqueID).setValue(room);
@@ -136,8 +145,10 @@ public class NewGameActivity extends AppCompatActivity {
             mDatabase.child(uniqueID).child("isReady").setValue(true);
             Intent intent = new Intent(NewGameActivity.this, GameActivity.class);
             intent.putExtra(ROOM_ID_EXTRA, uniqueID);
-            startActivity(intent);
+            startActivityForResult(intent, GAME_REQUEST_CODE);
         });
     }
+
+
 
 }

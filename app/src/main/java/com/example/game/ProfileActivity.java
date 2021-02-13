@@ -118,10 +118,8 @@ public class ProfileActivity extends AppCompatActivity {
                 mGamesPlayed.setText(gamesPlayed.toString());
                 if (gamesWon != null) {
                     mGamesWon.setText(gamesWon.toString());
-                    if (gamesWon != 0) {
-                        String winRate = Double.toString(Math.floor((double)gamesWon / (double)gamesPlayed * 10000)/100).concat(" %");
-                        mWinRate.setText(winRate);
-                    }
+                    String winRate = Double.toString(Math.floor((double)gamesWon / (double)gamesPlayed * 10000)/100).concat(" %");
+                    mWinRate.setText(winRate);
                 }
                 String imagePath = user.imagePath;
 
