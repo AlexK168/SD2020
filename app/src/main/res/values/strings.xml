@@ -1,0 +1,25 @@
+<resources>
+    <string name="app_name">Game</string>
+    <string name="log_out">Log out</string>
+    <string name="join_game">Join game</string>
+    <string name="new_game">New game</string>
+    <string name="profile">Profile</string>
+    <string name="save">Save</string>
+    <string name="gamesPlayed">Games played:</string>
+    <string name="gamesWon">Games won:</string>
+    <string name="winRate">Win rate:</string>
+    <string name="nicknameHint">Enter nickname</string>
+    <string name="failedLoginMsg">Failed to log in. Check internet connection, I dunno</string>
+    <string name="imageNotChosen">Image is not chosen</string>
+    <string name="emptyNickname">Empty Nickname</string>
+    <string name="place">Place</string>
+    <string name="x">x</string>
+    <string name="y">y</string>
+    <string name="size">Size</string>
+    <string name="orientation">Orientation</string>
+    <string name="delete">Delete</string>
+    <string name="place_ships">Place ships</string>
+    <string name="game_id">Game id:</string>
+    <string name="to_battle">To battle!</string>
+    <string name="shoot">FIRE!</string>
+</resources>
